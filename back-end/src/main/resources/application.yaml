@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/movies?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+
+mybatis:
+  mapper-locations: classpath:com.example.demo.mapper/*.xml
+  type-aliases-package: com.example.demo.entity
+
+pagehelper:
+  helper-dmybatis:
+    mapper-locations: classpath:mappers/*.xml
+    type-aliases-package: com.example.demo.entity                      #别名
+    configuration:
+      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+spring.thymeleaf.check-template: false
+spring.thymeleaf.check-template-location: false
+
+server:
+  port: 8181
