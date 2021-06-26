@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.mapper.UserMapper">
+    <!--ResultMap-->
+    <resultMap id="uResultMap" type="com.example.demo.entity.User">
+        <id property="username" column="username"/>
+        <id property="pass" column="pass"/>
+    </resultMap>
+    <select id="findUserByUsername" parameterType="String" resultType="com.example.demo.entity.User">
+        select * from user where username=#{username}
+    </select>
+
+    <select id="findAllUser" resultMap="uResultMap">
+        select * from user
+    </select>
+
+    <insert id="addUser" parameterType="com.example.demo.entity.User">
+        insert into user (username,pass) value (#{username},#{pass})
+    </insert>
+
+    <select id="deleteAll" >
+        delete from user
+    </select>
+
+    <delete id="deleteByUsername" parameterType="String">
+        delete from user where username=#{username}
+    </delete>
+
+    <!--动态SQL-->
+    <update id="updateUser" parameterType="com.example.demo.entity.User">
+        update user
+        <set>
+            <if test="pass != null">
+                pass=#{pass}
+            </if>
+        </set>
+        where username=#{username}
+    </update>
+</mapper>
